@@ -1,0 +1,122 @@
+==========================================================
+Map of Coffee — Reference List
+DECO1400 Website Implementation
+==========================================================
+
+
+IMAGES
+----------------------------------------------------------
+
+All photographs in this project are sourced from Unsplash under the
+Unsplash License, which permits free use for commercial and
+non-commercial purposes without attribution required. Individual
+photographers are credited via the Unsplash platform.
+
+Source: https://unsplash.com
+License: https://unsplash.com/license
+
+Specific photos used (by Unsplash photo ID, in order of appearance):
+
+  index.html
+    - images/map.png — Screenshot of Brisbane area
+      Source: Google Maps (https://maps.google.com)
+      © 2026 Google. Used for educational illustration only.
+
+  list.html
+    - photo-1501339847302-ac426a4a7cbb  (Project Blue Cafe)
+    - photo-1495474472287-4d71bcdd2085  (The Slow Pour)
+    - photo-1554118811-1e0d58224f24    (Bean & Ink)
+    - photo-1521017432531-fbd92d768814  (Midnight Oil Roasters)
+    - photo-1453614512568-c4024d13c247  (Hidden Bloom)
+    - photo-1442512595331-e89e73853f31  (The Daily Grind)
+
+  guide.html  (brewing method cards)
+    - photo-1495474472287-4d71bcdd2085  (Pour Over)
+    - photo-1510591509098-f4fdc6d0ff04  (Espresso)
+    - photo-1551030173-122aabc4489c    (French Press)
+    - photo-1461023058943-07fcbe16d735  (Cold Brew)
+    - photo-1572442388796-11668a67e53d  (AeroPress)
+    - photo-1534040385115-33dcb3acba5b  (Moka Pot)
+
+  detail.html  (menu items)
+    - Various Unsplash food/coffee photos sourced via the same license.
+
+
+FONTS
+----------------------------------------------------------
+
+Two typefaces are loaded from Google Fonts:
+
+  - Playfair Display (used for all headings)
+  - Inter (used for body text and UI)
+
+Source: https://fonts.google.com
+License: Open Font License (OFL)
+
+
+DESIGN PRINCIPLES
+----------------------------------------------------------
+
+Nielsen, J. (1994). 10 Usability Heuristics for User Interface Design.
+  Nielsen Norman Group.
+  https://www.nngroup.com/articles/ten-usability-heuristics/
+
+  Applied throughout the website design, particularly in:
+  - Navigation consistency across all 5 pages
+  - User control (search reset, back buttons)
+  - Recognition rather than recall (visible labels on all buttons)
+  - Feedback (hover states, focus rings, "no results" message)
+
+
+TECHNICAL REFERENCES
+----------------------------------------------------------
+
+MDN Web Docs (Mozilla Developer Network). Used as the primary
+reference for HTML, CSS, and JavaScript syntax throughout development.
+  Source: https://developer.mozilla.org
+
+Specific MDN articles consulted:
+
+  - Flexbox layout
+    https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_flexible_box_layout
+
+  - CSS custom properties (variables)
+    https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+
+  - setTimeout / clearTimeout (for debounce implementation)
+    https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
+
+  - Event.target and Element.closest() (for event delegation)
+    https://developer.mozilla.org/en-US/docs/Web/API/Element/closest
+
+  - ARIA: aria-expanded attribute
+    https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-expanded
+
+
+GENERATIVE AI ACKNOWLEDGEMENT
+----------------------------------------------------------
+
+This project was developed with assistance from Anthropic's Claude
+(a large language model accessed via https://claude.ai) for:
+
+  - Code review and refactoring suggestions
+  - Restructuring CSS Grid layouts into Flexbox-based equivalents
+  - Adding inline teaching-style Chinese comments to the codebase
+  - Suggesting accessibility improvements (aria-expanded, semantic HTML)
+
+All AI assistance is acknowledged here in accordance with the
+UQ Library guidelines on referencing generative AI:
+  https://guides.library.uq.edu.au/referencing/acknowledging-and-referencing-ai
+
+Reference format (APA 7th edition style, following UQ guidance):
+
+  Anthropic. (2026). Claude (Opus 4.7) [Large language model].
+  https://claude.ai
+
+The site's topic, structure, content, design direction, and final
+implementation decisions are the student's own original work. AI was
+used as a learning aid and code review partner, not as an author.
+
+==========================================================
+End of Reference List
+==========================================================

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map of Coffee – Home</title>
+  <meta name="description" content="Discover Brisbane's best coffee shops with Map of Coffee.">
+  <!-- 引入 Google Fonts：Playfair Display（标题用）+ Inter（正文用） -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       页面头部：语义化 <header> 包裹整个导航
+       ============================================================ -->
+  <header>
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="index.html" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="#6F4E37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="#6F4E37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="6" y1="1" x2="6" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+          <line x1="10" y1="1" x2="10" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+          <line x1="14" y1="1" x2="14" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">Coffee Map</span>
+      </a>
+
+      <!-- 汉堡菜单按钮：
+           aria-expanded 表示当前菜单是展开还是收起（初始 false）
+           aria-controls 指向它控制的那个菜单元素的 id -->
+      <button class="nav-toggle" id="navToggle"
+              aria-label="Toggle navigation"
+              aria-expanded="false"
+              aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="list.html" class="nav-link">Coffee Recommend</a>
+        <a href="guide.html" class="nav-link">Coffee Guide</a>
+        <a href="about.html" class="nav-link">About Us</a>
+      </div>
+
+      <div class="nav-actions">
+        <button id="darkModeBtn" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+        <button class="btn-login">Login</button>
+        <button class="btn-primary">Sign Up</button>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       主要内容区：用 <main> 语义化标签
+       ============================================================ -->
+  <main>
+
+    <!-- Hero 区 -->
+    <section class="hero">
+      <div class="hero-text">
+        <h1 class="hero-title">Map of Coffee</h1>
+        <p class="hero-desc">Coffee is the ritual of life, and we are the navigators of that ritual. Coffee Map connects every warm-hearted café in the city, capturing the aroma and story of each cup, so that even in the midst of busyness, you can find your own coffee corner.</p>
+      </div>
+
+      <!-- 搜索栏 -->
+      <div class="search-bar">
+        <input class="search-input" type="text" placeholder="Search the best coffee shop" id="heroSearch" aria-label="Search coffee shop">
+        <button class="search-btn" onclick="window.location.href='list.html'" aria-label="Search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" stroke="white" stroke-width="2"/>
+            <path d="M16.5 16.5L21 21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 背景大图 -->
+      <div class="hero-visual">
+        <div class="hero-gradient"></div>
+        <img class="hero-bg-img" src="images/map.png" alt="Brisbane Coffee Map">
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       页脚
+       ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-title">Map of Coffee</div>
+        <div class="footer-copy">© 2026 Coffee Map. All Rights Reserved.</div>
+      </div>
+      <div class="footer-icons">
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 返回顶部按钮（默认隐藏，滚动后由 JS 显示） -->
+  <button id="backToTop" title="Back to top" aria-label="Back to top">↑</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

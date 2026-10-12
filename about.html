@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us – Map of Coffee</title>
+  <meta name="description" content="Learn about the Map of Coffee team and our mission.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       页面头部
+       ============================================================ -->
+  <header>
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="index.html" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="#6F4E37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="#6F4E37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="6" y1="1" x2="6" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+          <line x1="10" y1="1" x2="10" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+          <line x1="14" y1="1" x2="14" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">Coffee Map</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle"
+              aria-label="Toggle navigation"
+              aria-expanded="false"
+              aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="list.html" class="nav-link">Coffee Recommend</a>
+        <a href="guide.html" class="nav-link">Coffee Guide</a>
+        <a href="about.html" class="nav-link active">About Us</a>
+      </div>
+
+      <div class="nav-actions">
+        <button id="darkModeBtn" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+        <button class="btn-login">Login</button>
+        <button class="btn-primary">Sign Up</button>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       About 页面 Hero 区（沿用 guide.html 同款棕色渐变 banner）
+       ============================================================ -->
+  <section class="guide-hero">
+    <div class="guide-hero-inner">
+      <h1 class="guide-hero-title">About Us</h1>
+      <p class="guide-hero-desc">We're a small team of coffee lovers mapping every great café in Brisbane — one cup at a time.</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       主要内容
+       ============================================================ -->
+  <main class="guide-main">
+    <div class="guide-inner">
+
+      <!-- ── 第 1 节：我们的故事 ── -->
+      <section>
+        <h2 class="section-title">Our Story</h2>
+        <p class="about-text">Map of Coffee started in 2025 as a side project between three university friends who shared one habit — drinking too much coffee while studying. We grew tired of wandering between cafés hoping the next one would be "the one", so we started writing down what we liked about each place: the beans, the music, the seats by the window. That notebook turned into this website.</p>
+        <p class="about-text">Today, we curate 120+ specialty coffee shops across Brisbane. Every café on this site has been visited by at least one of us. We don't accept payment for listings — only honest cups and honest words.</p>
+      </section>
+
+
+      <!-- ── 第 2 节：团队成员 ── -->
+      <section>
+        <h2 class="section-title">The Team</h2>
+        <div class="team-grid">
+
+          <div class="team-card">
+            <div class="team-avatar">Y</div>
+            <div class="team-name">Yuxin</div>
+            <div class="team-role">Founder &amp; Designer</div>
+            <p class="team-bio">Long black drinker. Builds the website and visits cafés on weekends.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">L</div>
+            <div class="team-name">Lin</div>
+            <div class="team-role">Content Editor</div>
+            <p class="team-bio">Writes the reviews. Believes a good flat white needs no sugar.</p>
+          </div>
+
+          <div class="team-card">
+            <div class="team-avatar">A</div>
+            <div class="team-name">Alex</div>
+            <div class="team-role">Photographer</div>
+            <p class="team-bio">Takes all the photos you see on this site. Drinks cold brew year-round.</p>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ── 第 3 节：联系我们（HTML 表单展示考点）── -->
+      <section>
+        <h2 class="section-title">Get in Touch</h2>
+        <p class="about-text">Found a café we missed? Have feedback? Drop us a line and we'll read every message.</p>
+
+        <!-- 联系表单：演示 HTML5 表单元素（label、required、type=email 等） -->
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Thanks! We\u0027ll get back to you soon.');">
+
+          <div class="form-row">
+            <label class="form-label" for="contactName">Your Name</label>
+            <input class="form-input" type="text" id="contactName" name="contactName" required placeholder="e.g. Jane Smith">
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="contactEmail">Email</label>
+            <input class="form-input" type="email" id="contactEmail" name="contactEmail" required placeholder="you@example.com">
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="contactTopic">Topic</label>
+            <select class="form-input" id="contactTopic" name="contactTopic">
+              <option value="suggest">Suggest a café</option>
+              <option value="feedback">Website feedback</option>
+              <option value="collab">Collaboration</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label class="form-label" for="contactMessage">Message</label>
+            <textarea class="form-input form-textarea" id="contactMessage" name="contactMessage" rows="5" required placeholder="Tell us what's on your mind..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary form-submit">Send Message</button>
+        </form>
+      </section>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       页脚
+       ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-title">Map of Coffee</div>
+        <div class="footer-copy">© 2026 Coffee Map. All Rights Reserved.</div>
+      </div>
+      <div class="footer-icons">
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" title="Back to top" aria-label="Back to top">↑</button>
+  <script src="js/script.js"></script>
+</body>
+</html>

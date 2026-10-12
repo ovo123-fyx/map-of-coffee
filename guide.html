@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coffee Guide – Map of Coffee</title>
+  <meta name="description" content="Learn brewing methods, tasting tips and FAQs about coffee.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       页面头部
+       ============================================================ -->
+  <header>
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="index.html" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="#6F4E37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="#6F4E37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="6" y1="1" x2="6" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+          <line x1="10" y1="1" x2="10" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+          <line x1="14" y1="1" x2="14" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">Coffee Map</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle"
+              aria-label="Toggle navigation"
+              aria-expanded="false"
+              aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="list.html" class="nav-link">Coffee Recommend</a>
+        <a href="guide.html" class="nav-link active">Coffee Guide</a>
+        <a href="about.html" class="nav-link">About Us</a>
+      </div>
+
+      <div class="nav-actions">
+        <button id="darkModeBtn" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+        <button class="btn-login">Login</button>
+        <button class="btn-primary">Sign Up</button>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       Guide Hero 区
+       ============================================================ -->
+  <section class="guide-hero">
+    <div class="guide-hero-inner">
+      <h1 class="guide-hero-title">Coffee Guide</h1>
+      <p class="guide-hero-desc">Everything you need to know about coffee — from brewing methods to tasting notes — curated for beginners and enthusiasts alike.</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       主要内容
+       ============================================================ -->
+  <main class="guide-main">
+    <div class="guide-inner">
+
+      <!-- ── 第 1 节：冲泡方法 ── -->
+      <section>
+        <h2 class="section-title">Brewing Methods</h2>
+        <div class="brew-grid">
+
+          <div class="brew-card">
+            <img class="brew-img" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=200&fit=crop" alt="Pour Over">
+            <div class="brew-body">
+              <div class="brew-name">Pour Over</div>
+              <span class="brew-tag">Beginner Friendly</span>
+              <p class="brew-desc">Hot water is poured slowly over ground coffee in a filter. The result is a clean, bright cup that highlights the coffee's natural flavors. Great for single-origin beans.</p>
+            </div>
+          </div>
+
+          <div class="brew-card">
+            <img class="brew-img" src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&h=200&fit=crop" alt="Espresso">
+            <div class="brew-body">
+              <div class="brew-name">Espresso</div>
+              <span class="brew-tag">Café Classic</span>
+              <p class="brew-desc">Pressurized hot water forces through finely ground coffee in seconds. Produces a concentrated, rich shot with a golden crema on top. The foundation of lattes and cappuccinos.</p>
+            </div>
+          </div>
+
+          <div class="brew-card">
+            <img class="brew-img" src="https://images.unsplash.com/photo-1551030173-122aabc4489c?w=400&h=200&fit=crop" alt="French Press">
+            <div class="brew-body">
+              <div class="brew-name">French Press</div>
+              <span class="brew-tag">Full Body</span>
+              <p class="brew-desc">Coarse ground coffee steeps in hot water for 4 minutes before a plunger filters it. Produces a heavy, full-bodied cup with rich oils intact. Perfect for dark roasts.</p>
+            </div>
+          </div>
+
+          <div class="brew-card">
+            <img class="brew-img" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=200&fit=crop" alt="Cold Brew">
+            <div class="brew-body">
+              <div class="brew-name">Cold Brew</div>
+              <span class="brew-tag">Smooth & Low Acid</span>
+              <p class="brew-desc">Coffee grounds steep in cold water for 12–24 hours. The slow extraction creates a naturally sweet, smooth concentrate. Less acidic and more caffeinated than hot brew.</p>
+            </div>
+          </div>
+
+          <div class="brew-card">
+            <img class="brew-img" src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&h=200&fit=crop" alt="AeroPress">
+            <div class="brew-body">
+              <div class="brew-name">AeroPress</div>
+              <span class="brew-tag">Versatile</span>
+              <p class="brew-desc">A portable brewer that uses air pressure to push water through coffee quickly. Produces a clean, espresso-like cup. Beloved by travelers and competition baristas alike.</p>
+            </div>
+          </div>
+
+          <div class="brew-card">
+            <img class="brew-img" src="https://images.unsplash.com/photo-1534040385115-33dcb3acba5b?w=400&h=200&fit=crop" alt="Moka Pot">
+            <div class="brew-body">
+              <div class="brew-name">Moka Pot</div>
+              <span class="brew-tag">Italian Classic</span>
+              <p class="brew-desc">Stovetop brewer that uses steam pressure to push water through coffee. Produces a strong, bold brew similar to espresso. A staple in Italian households for decades.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ── 第 2 节：品鉴小贴士 ── -->
+      <section>
+        <h2 class="section-title">Tasting Tips</h2>
+        <div class="tips-grid">
+
+          <div class="tip-card">
+            <div class="tip-icon">🌡️</div>
+            <div class="tip-body">
+              <div class="tip-title">Water Temperature Matters</div>
+              <p class="tip-desc">Use water between 90–96°C (195–205°F). Boiling water burns the coffee and creates bitterness. Too cool and you'll under-extract, resulting in a sour, weak cup.</p>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">⚖️</div>
+            <div class="tip-body">
+              <div class="tip-title">Use the Right Ratio</div>
+              <p class="tip-desc">A good starting point is 1:15 — 1 gram of coffee for every 15 grams of water. For a stronger cup try 1:12, for a lighter cup 1:17. Adjust to your taste.</p>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">🫙</div>
+            <div class="tip-body">
+              <div class="tip-title">Store Coffee Properly</div>
+              <p class="tip-desc">Keep coffee in an airtight container away from light, heat, and moisture. Avoid the fridge — condensation ruins the beans. Consume within 2–4 weeks of the roast date.</p>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">⏱️</div>
+            <div class="tip-body">
+              <div class="tip-title">Grind Fresh Every Time</div>
+              <p class="tip-desc">Coffee starts losing flavor within minutes of grinding. A burr grinder gives you consistent particle size. Grind right before brewing for the freshest, most vibrant cup.</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ── 第 3 节：FAQ 手风琴 ──
+           每个问题按钮上都加：
+           - aria-expanded="false"  表示初始是折叠的
+           - aria-controls="faqAnswerN"  关联到下面对应答案的 id
+           JS 点击时会同步把 aria-expanded 在 true/false 之间切换 -->
+      <section>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+
+        <div class="faq-list">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer1">
+              What's the difference between Arabica and Robusta?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faqAnswer1">
+              Arabica beans (Coffea arabica) are grown at higher altitudes and have a softer, sweeter taste with hints of fruit and sugar. They contain less caffeine. Robusta beans (Coffea canephora) are heartier, more bitter, and higher in caffeine. Most specialty coffee uses 100% Arabica, while Robusta is commonly found in instant coffee and some espresso blends for extra crema.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer2">
+              How do I know if coffee is fresh?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faqAnswer2">
+              Check the roast date on the bag — not the "best by" date. Freshly roasted coffee should be used within 2–4 weeks of the roast date. When you pour hot water over fresh grounds, you'll see them "bloom" — they puff up as CO₂ releases. If there's no bloom, the coffee is stale. Fresh coffee also has a strong, pleasant aroma.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer3">
+              What is a "single origin" coffee?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faqAnswer3">
+              Single origin coffee comes from one specific country, region, farm, or even a single lot. This allows you to taste the unique terroir — the soil, climate, and altitude — of that particular place. Single origin coffees are typically used for pour over or filter methods to highlight their distinct flavors, rather than being blended with other beans.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer4">
+              Why does my coffee taste bitter?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faqAnswer4">
+              Bitterness usually means over-extraction — too much flavor was pulled from the grounds. This can happen if your grind is too fine, your water is too hot, or your brew time is too long. Try a coarser grind, lower your water temperature slightly (aim for 93°C), or reduce your brew time. Using too much coffee can also contribute to bitterness.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faqAnswer5">
+              What's the best coffee for beginners?
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer" id="faqAnswer5">
+              For beginners, a medium roast from a familiar region like Colombia or Ethiopia is a great start. These tend to be balanced with mild acidity and pleasant sweetness. A simple pour over or French press is the easiest brewing method to learn. As your palate develops, experiment with different origins, roast levels, and brewing styles.
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+
+      <!-- ── CTA 区（原来用了大量内联 style，已移到 CSS 的 .guide-cta 类中）── -->
+      <section class="guide-cta">
+        <h2 class="guide-cta-title">Ready to Find Your Perfect Cup?</h2>
+        <p class="guide-cta-desc">Browse our curated list of Brisbane's best coffee shops.</p>
+        <a href="list.html" class="guide-cta-btn">Explore Coffee Shops →</a>
+      </section>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       页脚
+       ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-title">Map of Coffee</div>
+        <div class="footer-copy">© 2026 Coffee Map. All Rights Reserved.</div>
+      </div>
+      <div class="footer-icons">
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" title="Back to top" aria-label="Back to top">↑</button>
+  <script src="js/script.js"></script>
+</body>
+</html>

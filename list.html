@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coffee Recommend – Map of Coffee</title>
+  <meta name="description" content="Browse 120 curated coffee shops in Brisbane.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       页面头部
+       ============================================================ -->
+  <header>
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="index.html" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="#6F4E37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="#6F4E37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="6" y1="1" x2="6" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+          <line x1="10" y1="1" x2="10" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+          <line x1="14" y1="1" x2="14" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">Coffee Map</span>
+      </a>
+
+      <!-- 汉堡按钮：初始 aria-expanded="false"，aria-controls 指向 navLinks -->
+      <button class="nav-toggle" id="navToggle"
+              aria-label="Toggle navigation"
+              aria-expanded="false"
+              aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="list.html" class="nav-link active">Coffee Recommend</a>
+        <a href="guide.html" class="nav-link">Coffee Guide</a>
+        <a href="about.html" class="nav-link">About Us</a>
+      </div>
+
+      <div class="nav-actions">
+        <button id="darkModeBtn" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+        <button class="btn-login">Login</button>
+        <button class="btn-primary">Sign Up</button>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       主要内容
+       ============================================================ -->
+  <main>
+
+    <!-- 列表页 Hero 区 -->
+    <section class="list-hero">
+      <div class="list-hero-inner">
+        <h1 class="page-title">Coffee Recommend</h1>
+        <p class="page-desc">We've curated a collection of 120 exceptional coffee shops, each offering its own unique flavors and atmosphere—from cozy neighborhood hideaways to artisanal roasteries—ensuring every coffee lover finds their perfect cup in the city.</p>
+
+        <!-- 搜索框：JS 防抖功能作用于这个 input -->
+        <input class="list-search" id="cafeSearch" type="text"
+               placeholder="🔍  Search by name or location..."
+               aria-label="Search coffee shop by name or location">
+      </div>
+    </section>
+
+
+    <!-- 卡片列表 -->
+    <section class="cards-section">
+      <div class="cards-inner">
+
+        <!-- 第一行 -->
+        <div class="card-row">
+
+          <!-- data-name / data-location 用于 JS 搜索匹配 -->
+          <div class="card cafe-card" data-name="Project Blue Cafe Taringa" data-location="42 sunrise avenue arts district">
+            <img class="card-img" src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=560&h=240&fit=crop" alt="Project Blue Cafe Taringa">
+            <div class="card-body">
+              <div class="card-header">
+                <div class="card-logo">P</div>
+                <div class="card-name">Project Blue Cafe Taringa</div>
+              </div>
+              <p class="card-desc">A sun-drenched corner where early risers gather for perfectly pulled espressos and buttery croissants. The floor-to-ceiling windows flood the space with golden morning light.</p>
+              <div class="card-footer-row">
+                <div class="card-meta">
+                  <div class="meta-row">
+                    <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5a4.5 4.5 0 0 1 4.5 4.5c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5z" stroke="#6F4E37" stroke-width="1.2"/><circle cx="8" cy="6" r="1.5" stroke="#6F4E37" stroke-width="1.2"/></svg>
+                    42 Sunrise Avenue, Arts District
+                  </div>
+                  <div class="meta-row-group">
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#6F4E37" stroke-width="1.2"/><path d="M8 5v3l2 2" stroke="#6F4E37" stroke-width="1.2" stroke-linecap="round"/></svg>
+                      10:00–16:00
+                    </div>
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5L8 2z" stroke="#6F4E37" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                      4.8 / 1000 reviews
+                    </div>
+                  </div>
+                </div>
+                <a href="detail.html?cafe=blue" class="btn-view">View</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card cafe-card" data-name="The Slow Pour" data-location="88 oakwood lane old town">
+            <img class="card-img" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=560&h=240&fit=crop" alt="The Slow Pour">
+            <div class="card-body">
+              <div class="card-header">
+                <div class="card-logo">S</div>
+                <div class="card-name">The Slow Pour</div>
+              </div>
+              <p class="card-desc">Specializing in meticulous pour-over brews that take time but reward patience. Our baristas treat each cup as a meditation, guiding you through origin stories while the coffee drips slowly into glass carafes.</p>
+              <div class="card-footer-row">
+                <div class="card-meta">
+                  <div class="meta-row">
+                    <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5a4.5 4.5 0 0 1 4.5 4.5c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5z" stroke="#6F4E37" stroke-width="1.2"/><circle cx="8" cy="6" r="1.5" stroke="#6F4E37" stroke-width="1.2"/></svg>
+                    88 Oakwood Lane, Old Town
+                  </div>
+                  <div class="meta-row-group">
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#6F4E37" stroke-width="1.2"/><path d="M8 5v3l2 2" stroke="#6F4E37" stroke-width="1.2" stroke-linecap="round"/></svg>
+                      10:00–16:00
+                    </div>
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5L8 2z" stroke="#6F4E37" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                      4.0 / 536 reviews
+                    </div>
+                  </div>
+                </div>
+                <a href="detail.html?cafe=slow" class="btn-view">View</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 第二行 -->
+        <div class="card-row">
+
+          <div class="card cafe-card" data-name="Bean & Ink" data-location="56 creative quarter warehouse">
+            <img class="card-img" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=560&h=240&fit=crop" alt="Bean & Ink">
+            <div class="card-body">
+              <div class="card-header">
+                <div class="card-logo">B</div>
+                <div class="card-name">Bean &amp; Ink</div>
+              </div>
+              <p class="card-desc">Where coffee meets creativity. This hybrid space combines a specialty roastery with a writer's lounge, offering single-origin beans alongside vintage typewriters and endless notebooks.</p>
+              <div class="card-footer-row">
+                <div class="card-meta">
+                  <div class="meta-row">
+                    <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5a4.5 4.5 0 0 1 4.5 4.5c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5z" stroke="#6F4E37" stroke-width="1.2"/><circle cx="8" cy="6" r="1.5" stroke="#6F4E37" stroke-width="1.2"/></svg>
+                    56 Creative Quarter, Warehouse 7
+                  </div>
+                  <div class="meta-row-group">
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#6F4E37" stroke-width="1.2"/><path d="M8 5v3l2 2" stroke="#6F4E37" stroke-width="1.2" stroke-linecap="round"/></svg>
+                      10:00–16:00
+                    </div>
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5L8 2z" stroke="#6F4E37" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                      2.9 / 1000 reviews
+                    </div>
+                  </div>
+                </div>
+                <a href="detail.html?cafe=bean" class="btn-view">View</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card cafe-card" data-name="Midnight Oil Roasters" data-location="23 eclipse street downtown core">
+            <img class="card-img" src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=560&h=240&fit=crop" alt="Midnight Oil Roasters">
+            <div class="card-body">
+              <div class="card-header">
+                <div class="card-logo">M</div>
+                <div class="card-name">Midnight Oil Roasters</div>
+              </div>
+              <p class="card-desc">Burning bright until 2 AM for night owls and dreamers. Our in-house roastery operates around the clock, filling the air with caramelized aromatics while vinyl jazz spins in the background.</p>
+              <div class="card-footer-row">
+                <div class="card-meta">
+                  <div class="meta-row">
+                    <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5a4.5 4.5 0 0 1 4.5 4.5c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5z" stroke="#6F4E37" stroke-width="1.2"/><circle cx="8" cy="6" r="1.5" stroke="#6F4E37" stroke-width="1.2"/></svg>
+                    23 Eclipse Street, Downtown Core
+                  </div>
+                  <div class="meta-row-group">
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#6F4E37" stroke-width="1.2"/><path d="M8 5v3l2 2" stroke="#6F4E37" stroke-width="1.2" stroke-linecap="round"/></svg>
+                      10:00–02:00
+                    </div>
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5L8 2z" stroke="#6F4E37" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                      4.9 / 540 reviews
+                    </div>
+                  </div>
+                </div>
+                <a href="detail.html?cafe=midnight" class="btn-view">View</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 第三行 -->
+        <div class="card-row">
+
+          <div class="card cafe-card" data-name="Hidden Bloom" data-location="67 botanical lane green district">
+            <img class="card-img" src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=560&h=240&fit=crop" alt="Hidden Bloom">
+            <div class="card-body">
+              <div class="card-header">
+                <div class="card-logo">H</div>
+                <div class="card-name">Hidden Bloom</div>
+              </div>
+              <p class="card-desc">Tucked behind an unmarked door in a flower shop, this secret garden serves floral-infused lattes amidst tropical plants. The city's most Instagrammable sanctuary.</p>
+              <div class="card-footer-row">
+                <div class="card-meta">
+                  <div class="meta-row">
+                    <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5a4.5 4.5 0 0 1 4.5 4.5c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5z" stroke="#6F4E37" stroke-width="1.2"/><circle cx="8" cy="6" r="1.5" stroke="#6F4E37" stroke-width="1.2"/></svg>
+                    67 Botanical Lane, Green District
+                  </div>
+                  <div class="meta-row-group">
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#6F4E37" stroke-width="1.2"/><path d="M8 5v3l2 2" stroke="#6F4E37" stroke-width="1.2" stroke-linecap="round"/></svg>
+                      10:00–16:00
+                    </div>
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5L8 2z" stroke="#6F4E37" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                      4.0 / 154 reviews
+                    </div>
+                  </div>
+                </div>
+                <a href="detail.html?cafe=bloom" class="btn-view">View</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="card cafe-card" data-name="The Daily Grind" data-location="2 cornerstone plaza residential west">
+            <img class="card-img" src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=560&h=240&fit=crop" alt="The Daily Grind">
+            <div class="card-body">
+              <div class="card-header">
+                <div class="card-logo">D</div>
+                <div class="card-name">The Daily Grind</div>
+              </div>
+              <p class="card-desc">No pretension, just perfectly consistent coffee for your everyday ritual. Neighborhood regulars know each other here, and the barista remembers your order before you reach the counter.</p>
+              <div class="card-footer-row">
+                <div class="card-meta">
+                  <div class="meta-row">
+                    <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5a4.5 4.5 0 0 1 4.5 4.5c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5z" stroke="#6F4E37" stroke-width="1.2"/><circle cx="8" cy="6" r="1.5" stroke="#6F4E37" stroke-width="1.2"/></svg>
+                    2 Cornerstone Plaza, Residential West
+                  </div>
+                  <div class="meta-row-group">
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.5" stroke="#6F4E37" stroke-width="1.2"/><path d="M8 5v3l2 2" stroke="#6F4E37" stroke-width="1.2" stroke-linecap="round"/></svg>
+                      07:00–15:00
+                    </div>
+                    <div class="meta-row">
+                      <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5L8 2z" stroke="#6F4E37" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                      4.3 / 429 reviews
+                    </div>
+                  </div>
+                </div>
+                <a href="detail.html?cafe=daily" class="btn-view">View</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 搜索无结果提示：默认隐藏，JS 在没找到匹配时加 .visible 类显示 -->
+        <p class="no-results" id="noResults">No coffee shops found. Try a different search term.</p>
+
+        <!-- 分页 -->
+        <div class="pagination">
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">4</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================
+       页脚
+       ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-title">Map of Coffee</div>
+        <div class="footer-copy">© 2026 Coffee Map. All Rights Reserved.</div>
+      </div>
+      <div class="footer-icons">
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" title="Back to top" aria-label="Back to top">↑</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>

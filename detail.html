@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafe Detail – Map of Coffee</title>
+  <meta name="description" content="Cafe menu, hours and details.">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       页面头部
+       ============================================================ -->
+  <header>
+    <nav class="nav-inner" aria-label="Main navigation">
+      <a href="index.html" class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 8h1a4 4 0 0 1 0 8h-1" stroke="#6F4E37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" stroke="#6F4E37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="6" y1="1" x2="6" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+          <line x1="10" y1="1" x2="10" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+          <line x1="14" y1="1" x2="14" y2="4" stroke="#6F4E37" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">Coffee Map</span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle"
+              aria-label="Toggle navigation"
+              aria-expanded="false"
+              aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <div class="nav-links" id="navLinks">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="list.html" class="nav-link active">Coffee Recommend</a>
+        <a href="guide.html" class="nav-link">Coffee Guide</a>
+        <a href="about.html" class="nav-link">About Us</a>
+      </div>
+
+      <div class="nav-actions">
+        <button id="darkModeBtn" title="Toggle dark mode" aria-label="Toggle dark mode">🌙</button>
+        <button class="btn-login">Login</button>
+        <button class="btn-primary">Sign Up</button>
+      </div>
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       主要内容
+       ============================================================ -->
+  <main class="detail-main">
+    <div class="detail-inner">
+
+      <!-- 咖啡馆头部信息：店名、地址、营业时间等
+           内容由页面底部的小脚本根据 URL 参数动态填充 -->
+      <section class="cafe-header" id="cafeHeader">
+        <img class="cafe-cover" id="cafeCover" src="" alt="Cafe cover">
+        <div class="cafe-info-row">
+          <a href="list.html" class="back-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M19 12H5M5 12l7-7M5 12l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Back
+          </a>
+          <div class="cafe-center">
+            <div class="cafe-name-row">
+              <div class="cafe-name" id="cafeName"></div>
+            </div>
+            <div class="cafe-tagline" id="cafeTagline"></div>
+            <div class="cafe-meta-row">
+              <div class="cafe-meta">
+                <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5a4.5 4.5 0 0 1 4.5 4.5c0 3-4.5 8.5-4.5 8.5S3.5 9 3.5 6A4.5 4.5 0 0 1 8 1.5z" stroke="#6F4E37" stroke-width="1.2"/><circle cx="8" cy="6" r="1.5" stroke="#6F4E37" stroke-width="1.2"/></svg>
+                <span id="cafeAddress"></span>
+              </div>
+              <div class="cafe-meta">
+                <svg class="icon-sm" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2l1.5 3 3.5.5-2.5 2.5.5 3.5L8 10l-3 1.5.5-3.5L3 5.5l3.5-.5L8 2z" stroke="#6F4E37" stroke-width="1.2" stroke-linejoin="round"/></svg>
+                <span id="cafeRating"></span>
+              </div>
+            </div>
+          </div>
+          <div class="hours-card">
+            <div class="hours-header" id="cafeDay">Tuesday</div>
+            <div class="hours-time" id="cafeHours"></div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- 菜单分类标签：JS 把监听器绑在父容器 .filter-tabs 上，
+           用 closest() 找到被点击的那个 .filter-tab —— 这就是事件委托 -->
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-category="all">POPULAR</button>
+        <button class="filter-tab" data-category="cabinet">CABINET ITEMS</button>
+        <button class="filter-tab" data-category="coffee">COFFEE AND TEA</button>
+        <button class="filter-tab" data-category="sandwich">SANDWICHES</button>
+        <button class="filter-tab" data-category="noncaf">NON-CAFFEINE</button>
+        <button class="filter-tab" data-category="more">MORE</button>
+      </div>
+
+
+      <!-- 菜单网格 -->
+      <section class="menu-grid">
+
+        <div class="menu-item" data-category="coffee">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=256&h=160&fit=crop" alt="Iced Latte">
+          <div class="menu-body">
+            <div class="menu-name">Iced Latte</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $6.50</div>
+              <div class="menu-meta-row">⭐ 3.1 / 540 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="cabinet">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=256&h=160&fit=crop" alt="Pistachio Bar">
+          <div class="menu-body">
+            <div class="menu-name">Pistachio Bar</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $6.50</div>
+              <div class="menu-meta-row">⭐ 5.0 / 130 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="coffee">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=256&h=160&fit=crop" alt="Cappuccino">
+          <div class="menu-body">
+            <div class="menu-name">Cappuccino</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $4.80</div>
+              <div class="menu-meta-row">⭐ 4.0 / 816 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="noncaf">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1607083207095-6517c8f13735?w=256&h=160&fit=crop" alt="Hot Chocolate">
+          <div class="menu-body">
+            <div class="menu-name">Hot Chocolate</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $4.80</div>
+              <div class="menu-meta-row">⭐ 3.0 / 357 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="sandwich">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1528736235302-52922df5c122?w=256&h=160&fit=crop" alt="Bacon & Egg Muffin">
+          <div class="menu-body">
+            <div class="menu-name">Bacon &amp; Egg Muffin</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $6.50</div>
+              <div class="menu-meta-row">⭐ 2.8 / 492 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="cabinet">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1549931319-a545dcf3bc7b?w=256&h=160&fit=crop" alt="Banana Bread">
+          <div class="menu-body">
+            <div class="menu-name">Banana Bread</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $6.50</div>
+              <div class="menu-meta-row">⭐ 5.0 / 877 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="sandwich">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=256&h=160&fit=crop" alt="Breakfast Roll">
+          <div class="menu-body">
+            <div class="menu-name">Breakfast Roll</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $6.50</div>
+              <div class="menu-meta-row">⭐ 4.5 / 423 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="cabinet">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=256&h=160&fit=crop" alt="Cheese Croissant">
+          <div class="menu-body">
+            <div class="menu-name">Cheese Croissant</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $6.50</div>
+              <div class="menu-meta-row">⭐ 3.3 / 994 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="coffee">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1521302080334-4bebac2763a6?w=256&h=160&fit=crop" alt="Long Black">
+          <div class="menu-body">
+            <div class="menu-name">Long Black</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $6.50</div>
+              <div class="menu-meta-row">⭐ 3.5 / 357 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="coffee">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1534040385115-33dcb3acba5b?w=256&h=160&fit=crop" alt="Flat White">
+          <div class="menu-body">
+            <div class="menu-name">Flat White</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $6.50</div>
+              <div class="menu-meta-row">⭐ 4.1 / 274 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="coffee">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=256&h=160&fit=crop" alt="Espresso">
+          <div class="menu-body">
+            <div class="menu-name">Espresso</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $4.00</div>
+              <div class="menu-meta-row">⭐ 4.5 / 738 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+        <div class="menu-item" data-category="noncaf">
+          <img class="menu-img" src="https://images.unsplash.com/photo-1485808191679-5f86510bd9d4?w=256&h=160&fit=crop" alt="Chai Latte">
+          <div class="menu-body">
+            <div class="menu-name">Chai Latte</div>
+            <div class="menu-meta">
+              <div class="menu-meta-row">💰 $5.50</div>
+              <div class="menu-meta-row">⭐ 3.2 / 196 reviews</div>
+            </div>
+          </div>
+          <button class="btn-order">Order</button>
+        </div>
+
+      </section>
+
+
+      <!-- 分页 -->
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">4</button>
+      </div>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================
+       页脚
+       ============================================================ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-title">Map of Coffee</div>
+        <div class="footer-copy">© 2026 Coffee Map. All Rights Reserved.</div>
+      </div>
+      <div class="footer-icons">
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+        <div class="footer-icon"></div>
+      </div>
+    </div>
+  </footer>
+
+  <button id="backToTop" title="Back to top" aria-label="Back to top">↑</button>
+
+  <script src="js/script.js"></script>
+
+  <!-- ============================================================
+       内联小脚本：根据 URL 参数动态填充咖啡馆信息
+       例如 detail.html?cafe=blue 就会显示 Project Blue Cafe
+       ============================================================ -->
+  <script>
+    /* 把所有咖啡馆的资料放在一个对象里
+       键（key）就是 URL 参数里的 cafe 值，例如 ?cafe=blue */
+    var cafes = {
+      blue: {
+        name: 'Project Blue Cafe Taringa',
+        tagline: 'Serving locally roasted specialty coffee, fusion sandwiches and many more.',
+        address: '42 Sunrise Avenue, Arts District',
+        rating: '4.8 / 1000 reviews',
+        hours: '7:00 AM – 4:00 PM',
+        cover: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&h=240&fit=crop'
+      },
+      slow: {
+        name: 'The Slow Pour',
+        tagline: 'Meticulous pour-over brews, every cup a meditation.',
+        address: '88 Oakwood Lane, Old Town',
+        rating: '4.0 / 536 reviews',
+        hours: '10:00 AM – 4:00 PM',
+        cover: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=1200&h=240&fit=crop'
+      },
+      bean: {
+        name: 'Bean & Ink',
+        tagline: 'Where coffee meets creativity — roastery meets writer\'s lounge.',
+        address: '56 Creative Quarter, Warehouse 7',
+        rating: '2.9 / 1000 reviews',
+        hours: '9:00 AM – 5:00 PM',
+        cover: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200&h=240&fit=crop'
+      },
+      midnight: {
+        name: 'Midnight Oil Roasters',
+        tagline: 'Burning bright until 2 AM — for night owls and dreamers.',
+        address: '23 Eclipse Street, Downtown Core',
+        rating: '4.9 / 540 reviews',
+        hours: '10:00 AM – 2:00 AM',
+        cover: 'https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=1200&h=240&fit=crop'
+      },
+      bloom: {
+        name: 'Hidden Bloom',
+        tagline: 'A secret garden serving floral-infused lattes amidst tropical plants.',
+        address: '67 Botanical Lane, Green District',
+        rating: '4.0 / 154 reviews',
+        hours: '10:00 AM – 4:00 PM',
+        cover: 'https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=1200&h=240&fit=crop'
+      },
+      daily: {
+        name: 'The Daily Grind',
+        tagline: 'No pretension, just perfectly consistent coffee for your everyday ritual.',
+        address: '2 Cornerstone Plaza, Residential West',
+        rating: '4.3 / 429 reviews',
+        hours: '7:00 AM – 3:00 PM',
+        cover: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=1200&h=240&fit=crop'
+      }
+    };
+
+    /* 从 URL 里读出 cafe 参数（例如 ?cafe=blue 就拿到 "blue"） */
+    var params = new URLSearchParams(window.location.search);
+    var cafeKey = params.get('cafe');
+
+    /* 如果 URL 没带参数，默认显示 blue */
+    if(cafeKey == null) {
+      cafeKey = 'blue';
+    }
+
+    /* 根据 key 找到对应的咖啡馆资料；找不到就退回 blue */
+    var cafe = cafes[cafeKey];
+    if(cafe == null) {
+      cafe = cafes['blue'];
+    }
+
+    /* 把资料填到页面对应的位置 */
+    document.getElementById('cafeCover').src = cafe.cover;
+    document.getElementById('cafeCover').alt = cafe.name;
+    document.getElementById('cafeName').textContent = cafe.name;
+    document.getElementById('cafeTagline').textContent = cafe.tagline;
+    document.getElementById('cafeAddress').textContent = cafe.address;
+    document.getElementById('cafeRating').textContent = cafe.rating;
+    document.getElementById('cafeHours').textContent = cafe.hours;
+    document.title = cafe.name + ' – Map of Coffee';
+  </script>
+</body>
+</html>

@@ -1,0 +1,1678 @@
+/* ============================================================
+   Map of Coffee - style.css （教学重构版）
+   课程：网页设计基础
+   说明：本文件是整站的样式表，适用于所有页面
+   特点：
+     1. 在 :root 里集中声明颜色变量，方便统一修改
+     2. 全部用 Flexbox 做布局（不使用 CSS Grid，方便初学者理解）
+     3. 用基础的 @media 媒体查询做响应式
+     4. 用 transition 做简单的过渡动画
+   ============================================================ */
+
+
+/* ============================================================
+   ── 重置默认样式 ──
+   把所有元素的默认 margin/padding 清零，
+   再统一用 box-sizing: border-box，方便计算宽高
+   ============================================================ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ============================================================
+   ── CSS 变量（自定义属性）──
+   老师说：把颜色和圆角等公用的值放在 :root 里，
+   以后想改主题色，只需要改这里一处就行
+   ============================================================ */
+:root {
+  /* 品牌颜色 */
+  --brand-brown: #6F4E37;
+  --brand-orange: #E67E22;
+  --brand-orange-light: rgba(230, 126, 34, 0.20);
+
+  /* 页面背景与文字颜色 */
+  --bg-body: #F5F0E6;
+  --text-dark: rgba(0, 0, 0, 0.80);
+  --text-black: #000000;
+  --white: #ffffff;
+  --border-light: rgba(0, 0, 0, 0.10);
+
+  /* 阴影 */
+  --shadow-card: 0 4px 20px rgba(111, 78, 55, 0.12);
+  --shadow-nav: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+  /* 圆角 */
+  --radius-card: 8px;
+  --radius-pill: 38px;
+
+  /* 过渡动画的时间和速度曲线 */
+  --transition: 0.2s ease;
+}
+
+
+/* ============================================================
+   ── 深色模式 ──
+   原理：给 body 加上 .dark-mode 类后，
+   就用这一组变量覆盖上面 :root 里的同名变量
+   ============================================================ */
+body.dark-mode {
+  --bg-body: #1a1410;
+  --white: #2a2018;
+  --text-dark: rgba(255, 255, 255, 0.80);
+  --text-black: #f0e8d8;
+  --border-light: rgba(255, 255, 255, 0.10);
+}
+
+
+/* ============================================================
+   ── 全局 body 设置 ──
+   ============================================================ */
+body {
+  background: var(--bg-body);
+  font-family: 'Inter', sans-serif;
+  color: var(--text-black);
+  min-height: 100vh;
+  /* 切换深浅色时给一个平滑的过渡效果 */
+  transition: background var(--transition), color var(--transition);
+}
+
+/* 标题统一使用 Playfair Display 字体 */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+}
+
+
+/* ============================================================
+   ── 导航栏 ──
+   用 Flexbox 让左右两边自然分开（space-between）
+   ============================================================ */
+header {
+  width: 100%;
+  background: var(--bg-body);
+  /* 用 sticky 让导航栏在滚动时始终吸顶 */
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-nav);
+  transition: background var(--transition);
+}
+
+.nav-inner {
+  width: 1200px;
+  max-width: 100%;
+  margin: 0 auto;
+  /* Flexbox：左 logo、中间空白、右按钮 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo-text {
+  color: var(--brand-brown);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-link {
+  padding: 8px 0;
+  color: var(--text-black);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  /* 用透明边框占位，hover 时再改颜色，避免页面抖动 */
+  border-bottom: 2px solid transparent;
+  transition: border-color var(--transition), color var(--transition);
+  white-space: nowrap;
+}
+
+/* 当前页面对应的导航项 */
+.nav-link.active {
+  border-bottom: 2px solid var(--brand-orange);
+  color: var(--brand-brown);
+}
+
+/* 鼠标移上去时显示下划线 */
+.nav-link:hover {
+  border-bottom-color: var(--brand-orange);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   ── 按钮 ──
+   ============================================================ */
+.btn-login {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-light);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-black);
+  transition: background var(--transition);
+}
+
+.btn-login:hover {
+  background: var(--brand-orange-light);
+}
+
+.btn-primary {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--brand-orange);
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: opacity var(--transition);
+}
+
+.btn-primary:hover {
+  opacity: 0.88;
+}
+
+
+/* ── 深色模式切换按钮（圆形）── */
+#darkModeBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border-light);
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+  color: var(--text-black);
+}
+
+#darkModeBtn:hover {
+  background: var(--brand-orange-light);
+}
+
+
+/* ── 返回顶部按钮（默认隐藏，滚动后由 JS 加上 .visible 类才显示）── */
+#backToTop {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  background: var(--brand-brown);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  /* 默认隐藏 */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+/* 鼠标悬停时按钮微微上浮，hover 动画 */
+#backToTop:hover {
+  transform: translateY(-3px);
+}
+
+/* JS 给按钮加了 .visible 类后才显示出来 */
+#backToTop.visible {
+  display: flex;
+}
+
+
+/* ============================================================
+   ── 页脚 ──
+   ============================================================ */
+footer {
+  width: 100%;
+  background: var(--brand-brown);
+  padding: 24px 0;
+  margin-top: auto;
+}
+
+.footer-inner {
+  width: 1024px;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.footer-title {
+  color: white;
+  font-size: 24px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+.footer-copy {
+  color: white;
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.footer-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.footer-icon {
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 4px;
+  opacity: 0.9;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.footer-icon:hover {
+  opacity: 1;
+}
+
+
+/* ============================================================
+   ── 分页按钮 ──
+   ============================================================ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 40px 0;
+}
+
+.page-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  background: var(--brand-orange);
+  transition: background var(--transition), transform var(--transition);
+}
+
+.page-btn.active {
+  background: var(--brand-brown);
+}
+
+.page-btn:hover {
+  transform: translateY(-2px);
+}
+
+
+/* ── 小 SVG 图标的统一大小 ── */
+.icon-sm {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   首页（index.html）
+   ============================================================ */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.hero-text {
+  width: 1200px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px 24px 20px;
+}
+
+/* 大标题：原代码用了 clamp() 自适应字号，
+   这里改成最基础的固定字号 + 媒体查询，便于初学者理解 */
+.hero-title {
+  width: 640px;
+  max-width: 100%;
+  text-align: center;
+  color: var(--brand-brown);
+  font-size: 64px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.hero-desc {
+  width: 640px;
+  max-width: 100%;
+  text-align: center;
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+/* 搜索框（首页 Hero 区） */
+.search-bar {
+  width: 800px;
+  max-width: 90%;
+  padding: 8px 8px 8px 24px;
+  background: var(--white);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.10);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px auto;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  background: transparent;
+}
+
+.search-btn {
+  padding: 8px 16px;
+  background: var(--brand-orange);
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity var(--transition);
+}
+
+.search-btn:hover {
+  opacity: 0.88;
+}
+
+/* 首页背景大图 */
+.hero-visual {
+  width: 100%;
+  position: relative;
+}
+
+/* 顶部白色渐变，让背景图与上方文字过渡更自然 */
+.hero-gradient {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(180deg, var(--bg-body) 0%, rgba(245, 240, 230, 0) 100%);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-bg-img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+
+/* ============================================================
+   列表页（list.html）
+   ============================================================ */
+.list-hero {
+  display: flex;
+  justify-content: center;
+}
+
+.list-hero-inner {
+  width: 1200px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 24px;
+}
+
+.page-title {
+  width: 640px;
+  max-width: 100%;
+  text-align: center;
+  color: var(--brand-brown);
+  font-size: 56px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.page-desc {
+  width: 640px;
+  max-width: 100%;
+  text-align: center;
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+/* 列表页的搜索框 */
+.list-search {
+  width: 500px;
+  max-width: 100%;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-light);
+  background: var(--white);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dark);
+  outline: none;
+  transition: box-shadow var(--transition);
+}
+
+/* 聚焦时给一圈橙色描边 */
+.list-search:focus {
+  box-shadow: 0 0 0 2px var(--brand-orange);
+}
+
+
+/* ── 卡片整体容器 ── */
+.cards-section {
+  display: flex;
+  justify-content: center;
+}
+
+.cards-inner {
+  width: 1200px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 24px;
+}
+
+/* 每一行（用 Flexbox 让两张卡片左右并排） */
+.card-row {
+  display: flex;
+  gap: 16px;
+}
+
+/* JS 隐藏整行时加 .hidden 类 */
+.card-row.hidden {
+  display: none;
+}
+
+.card {
+  /* flex:1 让两张卡片等宽地平分一行 */
+  flex: 1;
+  padding: 16px;
+  background: var(--white);
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow var(--transition), transform var(--transition);
+  min-width: 0;
+}
+
+/* 鼠标悬停时卡片上浮 + 加深阴影 */
+.card:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-3px);
+}
+
+/* JS 搜索时给卡片加 .hidden 隐藏它 */
+.cafe-card.hidden {
+  display: none;
+}
+
+.card-img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  display: block;
+}
+
+.card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 卡片左上角的小方块 logo（取店名首字母） */
+.card-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  background: var(--brand-brown);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.card-name {
+  color: var(--text-black);
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+
+.card-desc {
+  color: var(--text-dark);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.card-footer-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dark);
+  font-size: 12px;
+}
+
+.meta-row-group {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-view {
+  padding: 8px 24px;
+  background: var(--brand-orange);
+  border-radius: var(--radius-pill);
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  transition: opacity var(--transition);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-view:hover {
+  opacity: 0.88;
+}
+
+
+/* ── 搜索无结果时的提示文字 ──
+   默认隐藏，JS 没找到匹配时加 .visible 类让它显示 */
+.no-results {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--text-dark);
+  font-size: 16px;
+  display: none;
+}
+
+.no-results.visible {
+  display: block;
+}
+
+
+/* ============================================================
+   咖啡馆详情页（detail.html）
+   ============================================================ */
+.detail-main {
+  display: flex;
+  justify-content: center;
+}
+
+.detail-inner {
+  width: 1200px;
+  max-width: 100%;
+  padding: 40px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cafe-cover {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  display: block;
+}
+
+.cafe-info-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid var(--border-light);
+  background: var(--white);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--text-black);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  transition: background var(--transition);
+}
+
+.back-btn:hover {
+  background: var(--bg-body);
+}
+
+.cafe-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.cafe-name-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 咖啡馆大标题：原代码用 clamp() 适配字号，
+   这里改成固定字号 + 媒体查询适配 */
+.cafe-name {
+  color: var(--brand-brown);
+  font-size: 40px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  text-align: center;
+}
+
+.cafe-tagline {
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.cafe-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cafe-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dark);
+  font-size: 12px;
+}
+
+/* 营业时间卡片（右上角小盒子） */
+.hours-card {
+  background: #F2D9BF;
+  border: 2px solid var(--brand-brown);
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  flex-shrink: 0;
+}
+
+.hours-header {
+  background: var(--brand-brown);
+  padding: 10px 20px;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.hours-time {
+  padding: 10px 20px;
+  color: var(--text-dark);
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}
+
+
+/* ── 菜单分类标签 ── */
+.filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 24px 0;
+  flex-wrap: wrap;
+}
+
+.filter-tab {
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-light);
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-black);
+  transition: background var(--transition);
+}
+
+.filter-tab.active {
+  background: var(--brand-orange-light);
+}
+
+.filter-tab:hover {
+  background: var(--brand-orange-light);
+}
+
+
+/* ── 菜单网格 ──
+   原代码用了 CSS Grid（display: grid + grid-template-columns）
+   这里改成 Flexbox + flex-wrap，让 4 个菜品一行
+   每个菜品宽度 = (100% - 3条间隙) / 4
+   用 calc((100% - 48px) / 4) 这样计算更直观 */
+.menu-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.menu-item {
+  /* 计算方式：总宽度减去 3 个 gap（每个 16px）再除以 4 */
+  width: calc((100% - 48px) / 4);
+  padding: 16px;
+  background: var(--white);
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.menu-item:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-2px);
+}
+
+/* JS 过滤分类时给菜品加 .hidden 隐藏 */
+.menu-item.hidden {
+  display: none;
+}
+
+.menu-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  display: block;
+}
+
+.menu-name {
+  color: var(--text-black);
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+}
+
+.menu-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.menu-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--text-dark);
+  font-size: 12px;
+}
+
+.btn-order {
+  width: 100%;
+  padding: 8px 16px;
+  background: var(--brand-orange);
+  border-radius: var(--radius-pill);
+  border: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: opacity var(--transition);
+  margin-top: auto;
+}
+
+.btn-order:hover {
+  opacity: 0.88;
+}
+
+
+/* ============================================================
+   咖啡指南页（guide.html）
+   ============================================================ */
+.guide-hero {
+  display: flex;
+  justify-content: center;
+  /* 棕色渐变 banner */
+  background: linear-gradient(135deg, var(--brand-brown) 0%, #8B6347 100%);
+  padding: 80px 24px;
+  margin-bottom: 60px;
+}
+
+.guide-hero-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.guide-hero-title {
+  color: white;
+  font-size: 56px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+
+.guide-hero-desc {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+  max-width: 560px;
+  line-height: 1.7;
+}
+
+.guide-main {
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+.guide-inner {
+  width: 1200px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding-bottom: 80px;
+}
+
+/* 二级标题（带一条橙色渐变下划线） */
+.section-title {
+  font-size: 36px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--brand-brown);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 用 ::after 伪元素拉一条横线 */
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand-orange), transparent);
+}
+
+
+/* ── 冲泡方法卡片 ──
+   原代码使用 CSS Grid 显示 3 列。
+   这里改用 Flexbox + flex-wrap，每张卡片占 1/3 宽 */
+.brew-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.brew-card {
+  /* 3 列：总宽度减去 2 个 gap（24px）再除以 3 */
+  width: calc((100% - 48px) / 3);
+  background: var(--white);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  transition: box-shadow var(--transition), transform var(--transition);
+  cursor: pointer;
+}
+
+.brew-card:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-4px);
+}
+
+.brew-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.brew-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.brew-name {
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--text-black);
+}
+
+.brew-desc {
+  font-size: 13px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+.brew-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--brand-orange-light);
+  color: var(--brand-brown);
+  font-size: 11px;
+  font-weight: 600;
+  width: fit-content;
+  margin-top: 4px;
+}
+
+
+/* ── FAQ 手风琴 ── */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.faq-item {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-black);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background var(--transition);
+}
+
+.faq-question:hover {
+  background: var(--brand-orange-light);
+}
+
+/* 展开状态下的标题文字颜色 */
+.faq-question.open {
+  color: var(--brand-brown);
+}
+
+.faq-icon {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* 展开时把 + 旋转 45° 变成 × */
+.faq-question.open .faq-icon {
+  transform: rotate(45deg);
+}
+
+/* 答案区：默认 max-height: 0 隐藏，
+   加 .open 类后撑开到 300px，配合 transition 实现平滑展开动画 */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+  padding: 0 24px;
+  font-size: 14px;
+  color: var(--text-dark);
+  line-height: 1.7;
+}
+
+.faq-answer.open {
+  max-height: 300px;
+  padding: 0 24px 20px;
+}
+
+
+/* ── 小贴士卡片 ──
+   原代码用 CSS Grid 显示两列；这里改用 Flexbox */
+.tips-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.tip-card {
+  /* 2 列：总宽度减去 1 个 gap（24px）再除以 2 */
+  width: calc((100% - 24px) / 2);
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  /* 左侧一条橙色装饰条 */
+  border-left: 4px solid var(--brand-orange);
+  transition: box-shadow var(--transition);
+}
+
+.tip-card:hover {
+  box-shadow: var(--shadow-card);
+}
+
+.tip-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+}
+
+.tip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tip-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-black);
+}
+
+.tip-desc {
+  font-size: 13px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+
+/* ── 指南页 CTA 区（用 class 替代原来的内联 style）── */
+.guide-cta {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.guide-cta-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  color: var(--brand-brown);
+  margin-bottom: 16px;
+}
+
+.guide-cta-desc {
+  color: var(--text-dark);
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+
+.guide-cta-btn {
+  padding: 14px 40px;
+  font-size: 16px;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: var(--radius-pill);
+  background: var(--brand-orange);
+  color: white;
+  font-weight: 500;
+  transition: opacity var(--transition);
+}
+
+.guide-cta-btn:hover {
+  opacity: 0.88;
+}
+
+
+/* ============================================================
+   ── 汉堡菜单按钮（移动端导航）──
+   桌面端默认隐藏，到了移动端才用 display: flex 显示出来
+   ============================================================ */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* 三条横线 */
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--brand-brown);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+
+/* ============================================================
+   ── 响应式：平板 ──
+   1024px 以下：导航缩小，卡片单列堆叠，菜品改两列
+   ============================================================ */
+@media (max-width: 1024px) {
+  .nav-inner {
+    padding: 16px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .cards-inner {
+    padding: 0 16px;
+  }
+
+  /* 平板上卡片改为单列堆叠 */
+  .card-row {
+    flex-direction: column;
+  }
+
+  /* 菜品和冲泡方法卡片：从原来的 4 列 / 3 列 改成 2 列 */
+  .menu-item {
+    width: calc((100% - 16px) / 2);
+  }
+
+  .brew-card {
+    width: calc((100% - 24px) / 2);
+  }
+
+  /* 小贴士改成 1 列 */
+  .tip-card {
+    width: 100%;
+  }
+
+  .detail-inner {
+    padding: 24px 16px;
+  }
+
+  .guide-inner {
+    padding: 0 16px 60px;
+  }
+
+  .list-hero-inner {
+    padding: 32px 16px;
+  }
+}
+
+
+/* ============================================================
+   ── 响应式：手机 ──
+   768px 以下：汉堡菜单出现、字体缩小、卡片图片缩小
+   ============================================================ */
+@media (max-width: 768px) {
+
+  /* 导航栏：紧贴顶部 */
+  header {
+    /* position 已经在桌面端设置过了，这里保持 sticky 即可 */
+  }
+
+  .nav-inner {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 16px;
+    position: relative;
+  }
+
+  /* 显示汉堡按钮 */
+  .nav-toggle {
+    display: flex;
+    order: 2;
+  }
+
+  /* 导航链接默认收起：max-height: 0 + overflow:hidden 实现折叠 */
+  .nav-links {
+    order: 4;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  /* JS 给 .nav-links 加上 .open 类后展开 */
+  .nav-links.open {
+    max-height: 300px;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 15px;
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
+  }
+
+  .nav-actions {
+    order: 3;
+    gap: 6px;
+  }
+
+  /* 手机上隐藏 Login 按钮，节省空间 */
+  .btn-login {
+    display: none;
+  }
+
+  /* Hero 文字缩小 */
+  .hero-title,
+  .page-title {
+    font-size: 32px;
+  }
+
+  .hero-desc,
+  .page-desc {
+    font-size: 13px;
+  }
+
+  .hero-bg-img {
+    height: 320px;
+  }
+
+  .search-bar {
+    padding: 8px 8px 8px 16px;
+  }
+
+  /* 列表卡片单列堆叠 */
+  .card-row {
+    flex-direction: column;
+  }
+
+  .card-img {
+    height: 180px;
+  }
+
+  /* 菜品依旧每行 2 个 */
+  .menu-item {
+    width: calc((100% - 12px) / 2);
+  }
+
+  .menu-grid {
+    gap: 12px;
+  }
+
+  /* 冲泡方法卡片：手机上改成 1 列 */
+  .brew-card {
+    width: 100%;
+  }
+
+  /* 详情页布局调整 */
+  .cafe-info-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .cafe-center {
+    align-items: flex-start;
+  }
+
+  .cafe-name {
+    text-align: left;
+    font-size: 22px;
+  }
+
+  .cafe-tagline {
+    text-align: left;
+  }
+
+  .cafe-meta-row {
+    justify-content: flex-start;
+  }
+
+  .hours-card {
+    align-self: flex-start;
+  }
+
+  /* 指南页 hero 缩小 */
+  .guide-hero {
+    padding: 48px 16px;
+  }
+
+  .guide-hero-title {
+    font-size: 32px;
+  }
+
+  /* 小贴士图标改为上下排列 */
+  .tip-card {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  /* 页脚改为单列居中 */
+  .footer-inner {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  .footer-icons {
+    justify-content: center;
+  }
+
+  /* 返回顶部按钮缩小 */
+  #backToTop {
+    bottom: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+/* ============================================================
+   ── 响应式：小屏手机 ──
+   480px 以下：所有卡片单列
+   ============================================================ */
+@media (max-width: 480px) {
+  /* 单列堆叠 */
+  .menu-item {
+    width: 100%;
+  }
+
+  .hero-bg-img {
+    height: 260px;
+  }
+
+  .filter-tabs {
+    gap: 4px;
+  }
+
+  .filter-tab {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  .pagination {
+    gap: 8px;
+  }
+
+  .page-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .cafe-name {
+    font-size: 20px;
+  }
+}
+
+
+/* ============================================================
+   ── 汉堡按钮动画 ──
+   点击展开后，三条横线变成一个 X
+   - 第 1 条向下平移并旋转 45°
+   - 第 2 条变透明
+   - 第 3 条向上平移并旋转 -45°
+   ============================================================ */
+.nav-toggle.open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* ============================================================
+   ── About 页：团队卡片 + 联系表单 ──
+   沿用站点配色和 Flexbox 布局
+   ============================================================ */
+
+/* 关于我们的正文段落 */
+.about-text {
+  font-size: 15px;
+  color: var(--text-dark);
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+
+/* 团队卡片网格：用 Flexbox 排成 3 列 */
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.team-card {
+  /* 3 列：总宽度减去 2 个 gap（24px）再除以 3 */
+  width: calc((100% - 48px) / 3);
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.team-card:hover {
+  box-shadow: var(--shadow-card);
+  transform: translateY(-4px);
+}
+
+/* 圆形头像：用首字母代替 */
+.team-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--brand-brown);
+  color: white;
+  font-size: 32px;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.team-name {
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--text-black);
+}
+
+.team-role {
+  font-size: 13px;
+  color: var(--brand-orange);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.team-bio {
+  font-size: 13px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+
+/* 联系表单 */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  margin-top: 24px;
+}
+
+/* 每一行：label 在上，input 在下 */
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-black);
+}
+
+.form-input {
+  padding: 10px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border-light);
+  background: var(--white);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-black);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+/* 聚焦时高亮（橙色描边） */
+.form-input:focus {
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 0 2px var(--brand-orange-light);
+}
+
+/* 多行文本框 */
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* 提交按钮：单独宽度，不要撑满 */
+.form-submit {
+  align-self: flex-start;
+  padding: 12px 32px;
+  font-size: 15px;
+  margin-top: 8px;
+}
+
+
+/* ── About 页响应式 ── */
+@media (max-width: 1024px) {
+  .team-card {
+    /* 平板：每行 2 张 */
+    width: calc((100% - 24px) / 2);
+  }
+}
+
+@media (max-width: 768px) {
+  .team-card {
+    /* 手机：每行 1 张 */
+    width: 100%;
+  }
+
+  .contact-form {
+    max-width: 100%;
+  }
+}
